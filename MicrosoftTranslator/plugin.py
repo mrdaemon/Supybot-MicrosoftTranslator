@@ -62,11 +62,11 @@ class MicrosoftTranslator(callbacks.Plugin):
 
         if from_lang not in self.engine.languages:
             irc.errorInvalid(_('Source language'), from_lang,
-                format(_('Valid languages are %L'), engine.languages))
+                format(_('Valid languages are %L'), self.engine.languages))
 
         if to_lang not in self.engine.languages:
             irc.errorInvalid(_('Destination language'), to_lang,
-                format(_('Valid languages are: %L'), engine.languages))
+                format(_('Valid languages are: %L'), self.engine.languages))
 
         irc.reply(self.engine.translate(source=from_lang, target=to_lang,
             text=text))
