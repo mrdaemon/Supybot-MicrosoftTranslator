@@ -28,6 +28,7 @@
 
 ###
 
+import supybot.conf as conf
 import supybot.utils as utils
 from supybot.commands import *
 import supybot.plugins as plugins
@@ -35,13 +36,48 @@ import supybot.ircutils as ircutils
 import supybot.callbacks as callbacks
 from supybot.i18n import PluginInternationalization, internationalizeDocstring
 
+from local import api
+
 _ = PluginInternationalization('MicrosoftTranslator')
 
 @internationalizeDocstring
 class MicrosoftTranslator(callbacks.Plugin):
     """Add the help for "@plugin help MicrosoftTranslator" here
     This should describe *how* to use this plugin."""
+
     threaded = True
+
+    def __init__(self, irc):
+        self.__parent = super(MicrosoftTranslator, self)
+        self.__parent.__init__(irc)
+
+        self.engine = api.MicrosoftTranslator(self.RegistryValue('azureKey'))
+
+    def translate(self, irc, msg, args, from_lang, to_lang, text):
+        """<from-language> [to] <to-language> <text>
+
+        Returns <text> translated from <from-language> into <to-language>.
+        from-language can be "auto" for autodetection.
+        """
+
+        if from_lang not in self.engine.languages:
+            irc.errorInvalid(_('Source language'), from_lang,
+                format(_('Valid languages are %L'), engine.languages))
+
+        if to_lang not in self.engine.languages:
+            irc.errorInvalid(_('Destination language'), to_lang,
+                format(_('Valid languages are: %L'), engine.languages))
+
+        irc.reply(self.engine.translate(source=from_lang, target=to_lang,
+            text=text))
+
+    def detectlanguage(self, irc, msg, args, text):
+        """ <text>
+
+        Detects language of <text>.
+        """
+
+        irc.reply(self.engine.detect(text))
 
 
 Class = MicrosoftTranslator
