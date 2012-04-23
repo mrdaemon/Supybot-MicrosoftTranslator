@@ -79,6 +79,9 @@ class MicrosoftTranslator(callbacks.Plugin):
 
         irc.reply(self.engine.detect(text))
 
+    translate = wrap(translate)
+    detect = wrap(detectlanguage)
+
 
 Class = MicrosoftTranslator
 
