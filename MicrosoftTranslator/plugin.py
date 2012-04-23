@@ -69,6 +69,9 @@ class MicrosoftTranslator(callbacks.Plugin):
             irc.errorInvalid(_('Destination language'), to_lang,
                 format(_('Valid languages are: %L'), self.engine.languages))
 
+        if from_lang == "auto":
+            from_lang = None
+
         irc.reply(self.engine.translate(source=from_lang, target=to_lang,
             text=text))
 
