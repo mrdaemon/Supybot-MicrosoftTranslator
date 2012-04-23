@@ -41,12 +41,18 @@ def configure(advanced):
     # registry as appropriate.
     from supybot.questions import expect, anything, something, yn
     conf.registerPlugin('MicrosoftTranslator', True)
+    azurekey = something(""" Please enter your Azure Marketplace key: """)
+    conf.supybot.plugins.MicrosoftTranslator.azureKey.setValue(azurekey)
 
 
-MicrosoftTranslator = conf.registerPlugin('MicrosoftTranslator')
 # This is where your configuration variables (if any) should go.  For example:
 # conf.registerGlobalValue(MicrosoftTranslator, 'someConfigVariableName',
 #     registry.Boolean(False, _("""Help for someConfigVariableName.""")))
 
+MicrosoftTranslator = conf.registerPlugin('MicrosoftTranslator')
+conf.registerGlobalValue(MicrosoftTranslator, 'azureKey',
+    registry.String('', _(""" Azure Account key used to access the service.
+    Must be set. Can be obtained from
+    https://datamarket.azure.com/account/info """)))
 
 # vim:set shiftwidth=4 tabstop=4 expandtab textwidth=79:
