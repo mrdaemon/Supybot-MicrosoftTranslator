@@ -92,7 +92,7 @@ class MicrosoftTranslator(object):
         return data.text
 
 
-    def _query(this, method, top="100", fmt="Raw", **kwargs):
+    def _query(self, method, top="100", fmt="Raw", **kwargs):
         """ Query Data Service with parameters
 
         Returns an ElementTree containing the data
@@ -105,7 +105,7 @@ class MicrosoftTranslator(object):
         data = []
 
         try:
-            handle = this.opener.open(urllib2.Request(url))
+            handle = self.opener.open(urllib2.Request(url))
             data = tree.parse(handle)
             handle.close()
         except IOError, ex:
