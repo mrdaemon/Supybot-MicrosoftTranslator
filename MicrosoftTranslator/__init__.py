@@ -29,8 +29,10 @@
 ###
 
 """
-Add a description of the plugin (to be presented to the user inside the wizard)
-here.  This should describe *what* the plugin does.
+Interface to Microsoft Translate
+(Requires Azure Marketplace account, free for up to 2 000 000 chars a month)
+
+See: https://datamarket.azure.com/dataset/1899a118-d202-492c-aa16-ba21c33c06cb
 """
 
 import supybot
@@ -38,17 +40,18 @@ import supybot.world as world
 
 # Use this for the version of this plugin.  You may wish to put a CVS keyword
 # in here if you're keeping the plugin in CVS or some similar system.
-__version__ = ""
+__version__ = "0.1a-prototype"
 
 # XXX Replace this with an appropriate author or supybot.Author instance.
-__author__ = supybot.authors.unknown
+__author__ = supybot.Author('Alexandre Gauthier', 'mr_daemon',
+                            'alex@underwares.org')
 
 # This is a dictionary mapping supybot.Author instances to lists of
 # contributions.
 __contributors__ = {}
 
 # This is a url where the most recent plugin package can be downloaded.
-__url__ = '' # 'http://supybot.com/Members/yourname/MicrosoftTranslator/download'
+__url__ = 'https://github.com/mrdaemon/Supybot-MicrosoftTranslator'
 
 import config
 import plugin
