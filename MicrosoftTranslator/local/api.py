@@ -57,13 +57,18 @@ class MicrosoftTranslator(object):
         handler = urllib2.HTTPBasicAuthHandler(authman)
 
         self.opener = urllib2.build_opener(handler)
+        self._languages = []
 
     @property
     def languages(self):
         """ Get a list of supported languages """
-        data = self._query("GetLanguagesForTranslation")
 
-        return [lang.text for lang in data]
+        # Caching, only expensive on first call.
+        if not len(self._languages):
+            data = self._query("GetLanguagesForTranslation")
+            self._languages = [lang.text for lang in data]
+
+        return self._languages
 
 
     def translate(self, target, text, source=None):
