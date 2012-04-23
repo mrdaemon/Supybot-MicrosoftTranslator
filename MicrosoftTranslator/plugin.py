@@ -71,16 +71,17 @@ class MicrosoftTranslator(callbacks.Plugin):
         irc.reply(self.engine.translate(source=from_lang, target=to_lang,
             text=text))
 
+    translate = wrap(translate, ['something', 'to', 'something', 'text'])
+
     def detectlanguage(self, irc, msg, args, text):
-        """ <text>
+        """<text>
 
         Detects language of <text>.
         """
 
         irc.reply(self.engine.detect(text))
 
-    translate = wrap(translate)
-    detect = wrap(detectlanguage)
+    detect = wrap(detectlanguage, ['something'])
 
 
 Class = MicrosoftTranslator
