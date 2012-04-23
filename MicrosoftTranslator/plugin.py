@@ -51,7 +51,7 @@ class MicrosoftTranslator(callbacks.Plugin):
         self.__parent = super(MicrosoftTranslator, self)
         self.__parent.__init__(irc)
 
-        self.engine = api.MicrosoftTranslator(self.RegistryValue('azureKey'))
+        self.engine = api.MicrosoftTranslator(self.registryValue('azureKey'))
 
     def translate(self, irc, msg, args, from_lang, to_lang, text):
         """<from-language> [to] <to-language> <text>
